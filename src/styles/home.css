@@ -1,0 +1,76 @@
+/*  Header  */
+.navbar{
+    border-bottom:1px solid black;
+}
+
+.navbar-brand:hover,:active,:focus{
+    color:transparent;
+}
+
+.favorite-dropdown{
+    background-color: transparent;
+    border-color: black;
+}
+
+.favorite-dropdown:hover,:active,:focus{
+    background-color: black;
+    color:white;
+    border-color:black;
+}
+
+.btn.favorite-number:hover,:active,:focus{
+    color:white;
+}
+
+.dropdown-menu{
+    border: 1px solid black;
+}
+
+/*  General  */
+h2{
+    font-weight: 700;
+}
+
+/*  Items  */
+.card-container{
+    overflow-x:auto;
+}
+
+/* Card */
+.card{
+    border: 1px solid black;
+}
+.card-title{
+    text-align:left;
+    padding-bottom: 5px;
+}
+
+#favorite-heart:hover{
+    color: red;   
+}
+
+.favorite-button {
+    color: black;
+    border-color: black;
+}
+
+.btn-outline-primary{
+    color:black;
+    border-color:black;
+}
+
+.btn-outline-primary:hover,:active,:focus{
+    color:white;
+    border:black;
+    background-color: black;
+}
+
+/*  Footer */
+
+footer{
+    border-top: 1px solid black;
+}
+
+footer p{
+    font-size:12px;
+}

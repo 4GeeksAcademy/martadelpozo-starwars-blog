@@ -1,44 +1,60 @@
-const getState = ({ getStore, getActions, setStore }) => {
+const getState = ({ getStore, setStore }) => {
+	const fetchData = async (url, key) => {
+		try {
+			const response = await fetch(url);
+			const data = await response.json();
+			setStore({ ...getStore(), [key]: data.results || data.result });
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
 	return {
 		store: {
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
+			characters: [],
+			character: {},
+			planets: [],
+			planet: {},
+			vehicles: [],
+			vehicle: {},
+			favorites: [],
 		},
 		actions: {
-			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
+			// GET Star Wars Characters
+			getCharacters: () => {
+				fetchData("https://www.swapi.tech/api/people/", "characters");
 			},
-			loadSomeData: () => {
-				/**
-					fetch().then().then(data => setStore({ "foo": data.bar }))
-				*/
+			// GET Star Wars Character
+			getCharacter: (id) => {
+				fetchData(`https://www.swapi.tech/api/people/${id}`, "character");
 			},
-			changeColor: (index, color) => {
-				//get the store
-				const store = getStore();
-
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
-
-				//reset the global store
-				setStore({ demo: demo });
-			}
-		}
+			// GET Star Wars Planets
+			getPlanets: () => {
+				fetchData("https://www.swapi.tech/api/planets/", "planets");
+			},
+			// GET Star Wars Planet
+			getPlanet: (id) => {
+				fetchData(`https://www.swapi.tech/api/planets/${id}`, "planet");
+			},
+			// GET Star Wars Vehicles
+			getVehicles: () => {
+				fetchData("https://www.swapi.tech/api/vehicles/", "vehicles");
+			},
+			// GET Star Wars Vehicle
+			getVehicle: (id) => {
+				fetchData(`https://www.swapi.tech/api/vehicles/${id}`, "vehicle");
+			},
+			// ADD Favorites
+			addFavorites: (favorite) => {
+				const favoritesState = [...getStore().favorites, favorite];
+				setStore({ ...getStore(), favorites: favoritesState });
+			},
+			// DELETE Favorites
+			deleteFavorite: (name) => {
+				const newFavorites = getStore().favorites.filter((item) => item !== name);
+				setStore({ ...getStore(), favorites: newFavorites });
+			},
+		},
 	};
 };
 
